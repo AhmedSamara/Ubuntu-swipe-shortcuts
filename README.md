@@ -2,7 +2,8 @@
 
 | Gesture | Action |
 |---|---|
-| 4-finger swipe up / down | Next / previous workspace |
+| 3-finger swipe up / down | Next / previous workspace |
+| 4-finger swipe up / down | Next / previous workspace, taking the focused window along |
 | 4-finger swipe left / right | Snap window to left / right half |
 | 3-finger swipe left / right | Back / forward |
 | 3-finger pinch out / in | Fullscreen / exit fullscreen |

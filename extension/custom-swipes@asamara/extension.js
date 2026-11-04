@@ -78,10 +78,12 @@ export default class CustomSwipesExtension extends Extension {
         if (Math.abs(distance) < THRESHOLD)
             return;
 
-        if (this._fingers === 4 && !horizontal) {
+        if (!horizontal) {
             // Swipe up -> next workspace, swipe down -> previous.
+            // 3 fingers: just switch. 4 fingers: take the focused window along.
             this._switchWorkspace(distance < 0
-                ? Meta.MotionDirection.RIGHT : Meta.MotionDirection.LEFT);
+                ? Meta.MotionDirection.RIGHT : Meta.MotionDirection.LEFT,
+                this._fingers === 4);
         } else if (this._fingers === 4 && horizontal) {
             this._tileHalf(distance < 0);
         } else if (this._fingers === 3 && horizontal) {
@@ -90,7 +92,6 @@ export default class CustomSwipesExtension extends Extension {
             // across apps than a synthesized Alt+Left/Right.
             this._clickButton(distance < 0 ? 8 : 9);
         }
-        // 3-finger vertical: swallowed (no action).
     }
 
     _onPinch(event) {
@@ -134,10 +135,17 @@ export default class CustomSwipesExtension extends Extension {
         this._pointer.notify_button(t++, button, Clutter.ButtonState.RELEASED);
     }
 
-    _switchWorkspace(direction) {
+    _switchWorkspace(direction, bringWindow) {
         const active = global.workspace_manager.get_active_workspace();
         const target = active.get_neighbor(direction);
-        if (target !== active)
+        if (target === active)
+            return;
+
+        const win = global.display.focus_window;
+        if (bringWindow && win && win.window_type === Meta.WindowType.NORMAL &&
+            !win.is_on_all_workspaces())
+            Main.wm.actionMoveWindow(win, target);
+        else
             Main.wm.actionMoveWorkspace(target);
     }
 

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Sets up custom touchpad gestures on GNOME (Wayland):
-#   4-finger up/down     -> switch workspace
+#   3-finger up/down     -> switch workspace
+#   4-finger up/down     -> switch workspace, bringing the focused window
 #   4-finger left/right  -> snap window to left/right half (via Tiling Assistant)
 #   3-finger left/right  -> back / forward
 #   3-finger pinch       -> fullscreen / exit fullscreen
