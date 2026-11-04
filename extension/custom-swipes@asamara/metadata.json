@@ -1,0 +1,7 @@
+{
+  "uuid": "custom-swipes@asamara",
+  "name": "Custom Swipes",
+  "description": "4-finger up/down: switch workspace. 4-finger left/right: tile window. 3-finger left/right: back/forward. 3-finger pinch: fullscreen. Replaces GNOME's built-in 3/4-finger swipes.",
+  "shell-version": ["50"],
+  "version": 1
+}
